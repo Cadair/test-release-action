@@ -65,18 +65,18 @@ jobs:
         run: |
           echo "${{ steps.markdown-changelog.outputs.content }}"
 
-      - name: Run towncrier
-        run: |
-          towncrier build --version ${{ inputs.version }} --yes
+      # - name: Run towncrier
+      #   run: |
+      #     towncrier build --version ${{ inputs.version }} --yes
 
-      - name: Configure Git
-        run: |
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git config --global user.name "${{ github.actor }}"
+      # - name: Configure Git
+      #   run: |
+      #     git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+      #     git config --global user.name "${{ github.actor }}"
 
-      - name: Commit Changelog
-        run: |
-          git commit -m "Render changelog for v${{ inputs.version }}"
+      # - name: Commit Changelog
+      #   run: |
+      #     git commit -m "Render changelog for v${{ inputs.version }}"
 
       # - name: Tag release
       #   run: git tag -a "v${{ inputs.version }}" -m "v${{ inputs.version }}"
@@ -94,5 +94,5 @@ jobs:
               repo: context.repo.repo,
               tag_name: "v${{ inputs.version }}",
               name: "v${{ inputs.version }}",
-              body: "${{ steps.markdown-changelog.outputs.content }}"
+              body: `${{ steps.markdown-changelog.outputs.content }}`
             });
