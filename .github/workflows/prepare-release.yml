@@ -82,6 +82,8 @@ jobs:
         run: git push
 
   make_release:
+    name: Make Github Release
+    runs-on: ubuntu-latest
     environment: release
     steps:
       - name: Create GitHub Release
