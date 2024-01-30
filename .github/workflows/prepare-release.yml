@@ -23,6 +23,8 @@ jobs:
   make_release_commit:
     name: Make release
     runs-on: ubuntu-latest
+    outputs:
+      markdown-changelog: ${{ steps.markdown-changelog.outputs.content }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -85,6 +87,7 @@ jobs:
     name: Make Github Release
     runs-on: ubuntu-latest
     environment: release
+    needs: [make_release_commit]
     steps:
       - name: Create GitHub Release
         uses: actions/github-script@v7
@@ -96,5 +99,5 @@ jobs:
               repo: context.repo.repo,
               tag_name: "v${{ inputs.version }}",
               name: "v${{ inputs.version }}",
-              body: `${{ steps.markdown-changelog.outputs.content }}`
+              body: `${{ needs.make_release_commit.outputs.markdown-changelog }}`
             });
