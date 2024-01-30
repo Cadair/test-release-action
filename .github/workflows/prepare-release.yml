@@ -38,7 +38,7 @@ jobs:
         run: python -m pip install --upgrade towncrier
 
       - name: Run towncrier in draft to capture the output
-        run: towncrier build --draft --version ${{ inputs.version }} --yes > /tmp/changelog.rst
+        run: towncrier build --draft --version ${{ inputs.version }} --yes > release-changelog.rst
 
       - name: Run towncrier
         run: |
@@ -54,7 +54,7 @@ jobs:
           git commit -m "Render changelog for v${{ inputs.version }}"
 
       - name: Debug changelog.rst
-        run: cat /tmp/changelog.rst
+        run: cat release-changelog.rst
 
       - name: Convert to markdown with pandoc
         uses: docker://pandoc/core:2.9
@@ -62,11 +62,11 @@ jobs:
           args: >- # allows you to break string into multiple lines
             --wrap=none
             -t markdown_strict
-            --output=/tmp/changelog.md
-            /tmp/changelog.rst
+            --output=release-changelog.md
+            release-changelog.rst
 
       - name: Debug changelog.md
-        run: cat /tmp/changelog.md
+        run: cat release-changelog.md
 
       # - name: Tag release
       #   run: git tag -a "v${{ inputs.version }}" -m "v${{ inputs.version }}"
