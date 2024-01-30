@@ -40,19 +40,6 @@ jobs:
       - name: Run towncrier in draft to capture the output
         run: towncrier build --draft --version ${{ inputs.version }} --yes > release-changelog.rst
 
-      - name: Run towncrier
-        run: |
-          towncrier build --version ${{ inputs.version }} --yes
-
-      - name: Configure Git
-        run: |
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git config --global user.name "${{ github.actor }}"
-
-      - name: Commit Changelog
-        run: |
-          git commit -m "Render changelog for v${{ inputs.version }}"
-
       - name: Debug changelog.rst
         run: cat release-changelog.rst
 
@@ -73,6 +60,19 @@ jobs:
             cat release-changelog.md
             echo EOF
           } >> "$GITHUB_OUTPUT"
+
+      - name: Run towncrier
+        run: |
+          towncrier build --version ${{ inputs.version }} --yes
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+
+      - name: Commit Changelog
+        run: |
+          git commit -m "Render changelog for v${{ inputs.version }}"
 
       - name: Tag release
         run: git tag -a "v${{ inputs.version }}" -m "v${{ inputs.version }}"
