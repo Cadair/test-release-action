@@ -1,3 +1,12 @@
+0.9.0 (2024-01-30)
+==================
+
+New Features
+------------
+
+- the next changelog entry (`#4 <https://github.com/Cadair/test-release-action/pull/4>`__)
+
+
 0.7.0 (2024-01-30)
 ==================
 
