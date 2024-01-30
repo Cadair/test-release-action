@@ -83,7 +83,7 @@ jobs:
 
   make_release:
     environment: release
-    jobs:
+    steps:
       - name: Create GitHub Release
         uses: actions/github-script@v7
         id: create-release
