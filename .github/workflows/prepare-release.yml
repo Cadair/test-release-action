@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   make_release_commit:
-    name: Render changelog with towncrier
+    name: Make release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -56,7 +56,7 @@ jobs:
         id: markdown-changelog
         run: |
           {
-            echo content<<EOF
+            echo 'content<<EOF'
             cat release-changelog.md
             echo EOF
           } >> "$GITHUB_OUTPUT"
