@@ -67,7 +67,12 @@ jobs:
 
       - name: Capture Markdown Changelog
         id: markdown-changelog
-        run: echo "::set-output name=content::$(cat release-changelog.md)"
+        run: |
+          {
+            echo content<<EOF'
+            cat release-changelog.md
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
 
       - name: Tag release
         run: git tag -a "v${{ inputs.version }}" -m "v${{ inputs.version }}"
