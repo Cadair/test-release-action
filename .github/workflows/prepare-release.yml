@@ -69,7 +69,7 @@ jobs:
         id: markdown-changelog
         run: |
           {
-            echo content<<EOF'
+            echo content<<EOF
             cat release-changelog.md
             echo EOF
           } >> "$GITHUB_OUTPUT"
