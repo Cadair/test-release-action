@@ -84,6 +84,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag_name: "v${{ inputs.version }}",
-              name: "v${{ inputs.version }}"
+              name: "v${{ inputs.version }}",
               body: "${{ steps.markdown-changelog.outputs.content }}"
             });
