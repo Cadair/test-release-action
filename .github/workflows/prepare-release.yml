@@ -61,6 +61,10 @@ jobs:
             echo EOF
           } >> "$GITHUB_OUTPUT"
 
+      - name: Debug md changelog
+        run: |
+          echo "${{ steps.markdown-changelog.outputs.content }}"
+
       - name: Run towncrier
         run: |
           towncrier build --version ${{ inputs.version }} --yes
@@ -74,11 +78,11 @@ jobs:
         run: |
           git commit -m "Render changelog for v${{ inputs.version }}"
 
-      - name: Tag release
-        run: git tag -a "v${{ inputs.version }}" -m "v${{ inputs.version }}"
+      # - name: Tag release
+      #   run: git tag -a "v${{ inputs.version }}" -m "v${{ inputs.version }}"
 
-      - name: Push
-        run: git push --follow-tags
+      # - name: Push
+      #   run: git push --follow-tags
 
       - name: Create GitHub Release
         uses: actions/github-script@v7
