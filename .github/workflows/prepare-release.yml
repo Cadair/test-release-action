@@ -94,7 +94,7 @@ jobs:
         id: create-release
         with:
           script: |
-            let release_name = ((${{ inputs.name }}) ? "v${{ inputs.version }} - ${{ inputs.name }}" : "v${{ inputs.version }}");
+            let release_name = (("${{ inputs.name }}") ? "v${{ inputs.version }} - ${{ inputs.name }}" : "v${{ inputs.version }}");
             return await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
